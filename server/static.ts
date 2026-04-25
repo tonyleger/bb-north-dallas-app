@@ -10,10 +10,23 @@ export function serveStatic(app: Express) {
     );
   }
 
+  // The polished BB Unified App mockup is the live home page.
+  // Static assets (manifest, icons, etc.) and /api routes still work normally.
+  // The mockup is self-contained (uses localStorage); to swap back to the
+  // React app, point these handlers at "index.html" instead.
+  const mockupFile = path.resolve(distPath, "BB_UnifiedApp_Mockup.html");
+  const fallbackFile = fs.existsSync(mockupFile)
+    ? mockupFile
+    : path.resolve(distPath, "index.html");
+
+  app.get("/", (_req, res) => {
+    res.sendFile(fallbackFile);
+  });
+
   app.use(express.static(distPath));
 
-  // fall through to index.html if the file doesn't exist
+  // SPA fall-through — anything not matched by static assets returns the mockup.
   app.use("/{*path}", (_req, res) => {
-    res.sendFile(path.resolve(distPath, "index.html"));
+    res.sendFile(fallbackFile);
   });
 }

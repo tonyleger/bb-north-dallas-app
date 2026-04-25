@@ -1,0 +1,25 @@
+{
+  "name": "BB North Dallas",
+  "short_name": "BB Dallas",
+  "description": "Budget Blinds North Dallas — Unified team workflow app",
+  "start_url": "./BB_UnifiedApp_Mockup.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B3052",
+  "theme_color": "#0B3052",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
