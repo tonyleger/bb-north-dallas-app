@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, ReactNode, useMemo, useEffect } from "react";
+import { queryClient } from "@/lib/queryClient";
 
 const STORAGE_KEY = "bb-app-user";
 
@@ -16,6 +17,7 @@ interface AuthContextType {
   user: User | null;
   login: (email: string, pin: string) => Promise<void>;
   logout: () => void;
+  switchRole: (role: string) => Promise<void>;
   isLoading: boolean;
   error: string | null;
 }
@@ -85,7 +87,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const value = useMemo(() => ({ user, login, logout, isLoading, error }), [user, isLoading, error]);
+  const switchRole = async (role: string) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const response = await fetch("/api/switch-role", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ role }),
+      });
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.error || "Switch failed");
+      }
+      const userData = await response.json();
+      setUser(userData);
+      // Refresh all cached data for the new role
+      queryClient.invalidateQueries();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Switch failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const value = useMemo(() => ({ user, login, logout, switchRole, isLoading, error }), [user, isLoading, error]);
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

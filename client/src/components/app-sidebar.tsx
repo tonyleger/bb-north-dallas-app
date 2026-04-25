@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { canSee } from "@/lib/roles";
+import { canSee, ROLES } from "@/lib/roles";
 
 const navItems = [
   { path: "/", label: "Dashboard", icon: "📊", section: "dashboard" },
@@ -26,6 +26,27 @@ const navItems = [
   { path: "/follow-ups", label: "Follow-ups", icon: "🔄", section: "follow-ups" },
   { path: "/service", label: "Service & Repair", icon: "🔧", section: "service" },
 ];
+
+/* ─── Role Switcher (testing) ─── */
+const allRoles = Object.values(ROLES);
+
+function RoleSwitcher() {
+  const { user, switchRole, isLoading } = useAuth();
+
+  return (
+    <select
+      value={user?.role || ""}
+      onChange={(e) => switchRole(e.target.value)}
+      disabled={isLoading}
+      className="role-switcher"
+      title="Switch role (testing)"
+    >
+      {allRoles.map((role) => (
+        <option key={role} value={role}>{role}</option>
+      ))}
+    </select>
+  );
+}
 
 /* ─── Top Header Bar ─── */
 function TopHeader() {
@@ -40,6 +61,7 @@ function TopHeader() {
         </span>
       </div>
       <div className="top-header-right">
+        <RoleSwitcher />
         {user && (
           <span className="top-user-info">
             {user.name} · {user.role}
@@ -105,6 +127,9 @@ function MobileDrawer({ isOpen, onClose }: { isOpen: boolean; onClose: () => voi
           <div className="mobile-user-info">
             <p className="font-semibold">{user.name}</p>
             <p className="text-xs opacity-70">{user.role}</p>
+            <div className="mt-2">
+              <RoleSwitcher />
+            </div>
           </div>
         )}
         <nav className="mobile-nav">

@@ -59,6 +59,23 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
     res.json({ success: true });
   });
 
+  // Switch role (for testing) — logs in as a different user by role
+  app.post("/api/switch-role", async (req, res) => {
+    const { role } = req.body;
+    if (!role) return res.status(400).json({ error: "Role required" });
+
+    const users = await storage.getUsers();
+    const user = users.find(u => u.role === role && u.isActive === 1);
+    if (!user) return res.status(404).json({ error: "No active user with that role" });
+
+    req.session.userId = user.id;
+    req.session.userRole = user.role;
+    req.session.userName = user.name;
+
+    const { pin: _, ...userWithoutPin } = user;
+    res.json(userWithoutPin);
+  });
+
   // Protect all /api routes below with requireAuth
   app.use("/api", requireAuth);
 

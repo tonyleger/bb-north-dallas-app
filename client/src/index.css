@@ -175,6 +175,32 @@
   background: #475569;
 }
 
+/* ─── Role Switcher (testing dropdown) ─── */
+.role-switcher {
+  background: #334155;
+  color: #fff;
+  border: 1px solid #475569;
+  font-size: 12px;
+  padding: 5px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  font-weight: 600;
+}
+
+.role-switcher:hover {
+  background: #475569;
+}
+
+.role-switcher:focus {
+  border-color: #76C8DF;
+}
+
+.role-switcher option {
+  background: #1e293b;
+  color: #fff;
+}
+
 /* ─── Role Tab Navigation ─── */
 .role-nav {
   display: flex;
