@@ -10,6 +10,11 @@ import { createServer } from "http";
 const app = express();
 const httpServer = createServer(app);
 
+// Trust Railway's reverse proxy so secure cookies work
+if (process.env.NODE_ENV === "production") {
+  app.set("trust proxy", 1);
+}
+
 // Extend session types
 declare module "express-session" {
   interface SessionData {
