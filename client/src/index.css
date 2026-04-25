@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* LIGHT MODE */
+:root {
+  --button-outline: rgba(0, 0, 0, 0.1);
+  --badge-outline: rgba(0, 0, 0, 0.05);
+  --opaque-button-border-intensity: -8;
+  --elevate-1: rgba(0, 0, 0, 0.03);
+  --elevate-2: rgba(0, 0, 0, 0.08);
+
+  --background: 200 20% 98%;
+  --foreground: 215 25% 15%;
+  --border: 200 15% 88%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 25% 15%;
+  --card-border: 200 15% 91%;
+  --sidebar: 213 30% 16%;
+  --sidebar-foreground: 200 20% 90%;
+  --sidebar-border: 213 25% 22%;
+  --sidebar-primary: 193 62% 67%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 213 25% 22%;
+  --sidebar-accent-foreground: 200 20% 90%;
+  --sidebar-ring: 193 62% 55%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 25% 15%;
+  --popover-border: 200 15% 88%;
+  --primary: 193 62% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 200 15% 93%;
+  --secondary-foreground: 215 25% 25%;
+  --muted: 200 15% 95%;
+  --muted-foreground: 215 10% 45%;
+  --accent: 200 15% 93%;
+  --accent-foreground: 215 25% 25%;
+  --destructive: 0 65% 50%;
+  --destructive-foreground: 0 0% 100%;
+  --input: 200 15% 88%;
+  --ring: 193 62% 55%;
+  --chart-1: 193 62% 55%;
+  --chart-2: 25 80% 55%;
+  --chart-3: 150 45% 40%;
+  --chart-4: 280 50% 55%;
+  --chart-5: 340 55% 55%;
+  --font-sans: "General Sans", system-ui, sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: Menlo, monospace;
+  --radius: 0.5rem;
+  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.04);
+  --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.06);
+  --shadow-sm: 0px 1px 4px 0px hsl(0 0% 0% / 0.08), 0px 1px 2px -1px hsl(0 0% 0% / 0.04);
+  --shadow: 0px 2px 6px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.06);
+  --shadow-md: 0px 4px 12px 0px hsl(0 0% 0% / 0.1), 0px 2px 4px -1px hsl(0 0% 0% / 0.06);
+  --shadow-lg: 0px 8px 24px 0px hsl(0 0% 0% / 0.12), 0px 4px 6px -1px hsl(0 0% 0% / 0.08);
+  --shadow-xl: 0px 12px 32px 0px hsl(0 0% 0% / 0.14), 0px 8px 10px -1px hsl(0 0% 0% / 0.08);
+  --shadow-2xl: 0px 24px 48px 0px hsl(0 0% 0% / 0.16);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  /* Sidebar border helpers */
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-accent-border: hsl(var(--sidebar-accent));
+  --primary-border: hsl(var(--primary));
+  --secondary-border: hsl(var(--secondary));
+  --muted-border: hsl(var(--muted));
+  --accent-border: hsl(var(--accent));
+  --destructive-border: hsl(var(--destructive));
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}
