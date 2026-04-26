@@ -1,6 +1,5 @@
 @echo off
-REM Deploy the BB Unified mockup as the live Railway home page.
-REM Double-click this file to run, or run from the app/ folder.
+REM Deploy mockup updates to Railway. Double-click this file to run.
 
 cd /d "%~dp0"
 
@@ -18,7 +17,7 @@ git add -A
 
 echo.
 echo === Committing ===
-git commit -m "Serve BB Unified mockup as live home page" -m "The polished mockup is now the live face of the app at / so the team can use it on phones (PWA) while the React port continues underneath. /api/* routes still work for future use."
+git commit -m "Polish pass: KPI clicks, hash routing, store init, dropdown" -m "Fixes from AUDIT_REPORT.md commit batch 1: - Overdue/Installs/Issues KPIs only clickable when count > 0 - Add id='installs-today-section' so Installs Today KPI scrolls correctly - Initialize STORE defaults at load and persist (no first-load data loss) - Better try/catch in loadStore/saveStore with console warnings - URL hash routing: setRole updates location.hash; hashchange listener; initial boot reads hash so #/warehouse opens to that view - PREVIEW AS dropdown now includes all 9 roles (added Overview, Team, Follow-up Dash, Owner)"
 
 echo.
 echo === Pushing to GitHub (Railway will auto-deploy) ===
